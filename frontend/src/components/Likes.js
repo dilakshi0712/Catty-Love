@@ -7,10 +7,10 @@ const Likes = ({ value, text, color }) => {
         <i
           style={{ color }}
           className={
-            value >= 1
+            value >= 3
               ? 'fas fa-thumbs-up'
-              : value >= 0.5
-              ? 'fas fa-thumbs-up-half-alt'
+              : value <= 2
+              ? 'fas fa-thumbs-down'
               : 'fas fa-thumbs-up'
           }
         ></i>
