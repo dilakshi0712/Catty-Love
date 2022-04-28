@@ -60,14 +60,16 @@ const deleteCat = asyncHandler(async (req, res) => {
 const createCat = asyncHandler(async (req, res) => {
   const cat = new Cat({
     name: 'Sample name',
-    price: 0,
+    age: 0,
     user: req.user._id,
     image: '/images/sample.jpg',
-    brand: 'Sample brand',
-    category: 'Sample category',
+    gender: 'Sample gender',
+    contactno: 'Sample contactno',
     countInStock: 0,
     numReviews: 0,
     description: 'Sample description',
+    feature: 'Sample features',
+    address: 'Sample address',
   })
 
   const createdCat = await cat.save()
@@ -80,24 +82,28 @@ const createCat = asyncHandler(async (req, res) => {
 const updateCat = asyncHandler(async (req, res) => {
   const {
     name,
-    price,
+    age,
     description,
     image,
-    brand,
-    category,
+    gender,
+    contactno,
     countInStock,
+    feature,
+    address,
   } = req.body
 
   const cat = await Cat.findById(req.params.id)
 
   if (cat) {
     cat.name = name
-    cat.price = price
+    cat.age = age
     cat.description = description
+    cat.feature = feature
     cat.image = image
-    cat.brand = brand
-    cat.category = category
+    cat.gender = gender
+    cat.contactno = contactno
     cat.countInStock = countInStock
+    cat.address = address
 
     const updatedCat = await cat.save()
     res.json(updatedCat)

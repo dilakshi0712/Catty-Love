@@ -24,7 +24,7 @@ const Cat = ({ cat }) => {
           />
         </Card.Text>
 
-        <Card.Text as='h3'>${cat.price}</Card.Text>
+        <Card.Text as='h3'>${cat.age}</Card.Text>
       </Card.Body>
     </Card>
   )

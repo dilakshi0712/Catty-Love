@@ -15,7 +15,7 @@ export const addToWishList = (id, qty) => async (dispatch, getState) => {
       cat: data._id,
       name: data.name,
       image: data.image,
-      price: data.price,
+      age: data.age,
       countInStock: data.countInStock,
       qty,
     },

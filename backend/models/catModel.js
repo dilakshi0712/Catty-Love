@@ -31,11 +31,11 @@ const catSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    brand: {
+    gender: {
       type: String,
       required: true,
     },
-    category: {
+    contactno: {
       type: String,
       required: true,
     },
@@ -54,7 +54,7 @@ const catSchema = mongoose.Schema(
       required: true,
       default: 0,
     },
-    price: {
+    age: {
       type: Number,
       required: true,
       default: 0,
@@ -63,6 +63,14 @@ const catSchema = mongoose.Schema(
       type: Number,
       required: true,
       default: 0,
+    },
+    address: {
+      type: String,
+      required: true,
+    },
+    feature: {
+      type: String,
+      required: true,
     },
   },
   {

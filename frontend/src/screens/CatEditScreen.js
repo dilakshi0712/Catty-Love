@@ -13,12 +13,14 @@ const CatEditScreen = ({ match, history }) => {
   const catId = match.params.id
 
   const [name, setName] = useState('')
-  const [price, setPrice] = useState(0)
+  const [age, setPrice] = useState(0)
   const [image, setImage] = useState('')
-  const [brand, setBrand] = useState('')
-  const [category, setCategory] = useState('')
+  const [gender, setBrand] = useState('')
+  const [contactno, setCategory] = useState('')
   const [countInStock, setCountInStock] = useState(0)
   const [description, setDescription] = useState('')
+  const [feature, setFeature] = useState('')
+  const [address, setAddress] = useState('')
   const [uploading, setUploading] = useState(false)
 
   const dispatch = useDispatch()
@@ -42,12 +44,14 @@ const CatEditScreen = ({ match, history }) => {
         dispatch(listCatDetails(catId))
       } else {
         setName(cat.name)
-        setPrice(cat.price)
+        setPrice(cat.age)
         setImage(cat.image)
-        setBrand(cat.brand)
-        setCategory(cat.category)
+        setBrand(cat.gender)
+        setCategory(cat.contactno)
         setCountInStock(cat.countInStock)
         setDescription(cat.description)
+        setFeature(cat.feature)
+        setAddress(cat.address)
       }
     }
   }, [dispatch, history, catId, cat, successUpdate])
@@ -81,12 +85,14 @@ const CatEditScreen = ({ match, history }) => {
       updateCat({
         _id: catId,
         name,
-        price,
+        age,
         image,
-        brand,
-        category,
+        gender,
+        contactno,
         description,
+        feature,
         countInStock,
+        address,
       })
     )
   }
@@ -121,7 +127,7 @@ const CatEditScreen = ({ match, history }) => {
               <Form.Control
                 type='number'
                 placeholder='Enter age'
-                value={price}
+                value={age}
                 onChange={(e) => setPrice(e.target.value)}
               ></Form.Control>
             </Form.Group>
@@ -148,7 +154,7 @@ const CatEditScreen = ({ match, history }) => {
               <Form.Control
                 type='text'
                 placeholder='Enter gender'
-                value={brand}
+                value={gender}
                 onChange={(e) => setBrand(e.target.value)}
               ></Form.Control>
             </Form.Group>
@@ -168,7 +174,7 @@ const CatEditScreen = ({ match, history }) => {
               <Form.Control
                 type='text'
                 placeholder='Enter number'
-                value={category}
+                value={contactno}
                 onChange={(e) => setCategory(e.target.value)}
               ></Form.Control>
             </Form.Group>
@@ -180,6 +186,26 @@ const CatEditScreen = ({ match, history }) => {
                 placeholder='Enter description'
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
+
+            <Form.Group controlId='feature'>
+              <Form.Label>Features</Form.Label>
+              <Form.Control
+                type='text'
+                placeholder='Enter features'
+                value={feature}
+                onChange={(e) => setFeature(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
+
+            <Form.Group controlId='address'>
+              <Form.Label>Address</Form.Label>
+              <Form.Control
+                type='text'
+                placeholder='Enter Address'
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
               ></Form.Control>
             </Form.Group>
 

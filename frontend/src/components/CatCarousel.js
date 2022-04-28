@@ -28,7 +28,7 @@ const CatCarousel = () => {
             <Image src={cat.image} alt={cat.name} fluid />
             <Carousel.Caption className='carousel-caption'>
               <h2>
-                {cat.name} (${cat.price})
+                {cat.name} (Years{cat.age})
               </h2>
             </Carousel.Caption>
           </Link>

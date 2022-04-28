@@ -97,7 +97,7 @@ const CatListScreen = ({ history, match }) => {
               <tr>
                 <th>ID</th>
                 <th>NAME</th>
-                <th>No of Likes</th>
+                <th>NO OF LIKES</th>
                 <th>DESCRIPTION</th>
                 <th>GENDER</th>
                 <th></th>

@@ -81,10 +81,10 @@ const CatScreen = ({ history, match }) => {
                 <ListGroup.Item>
                   <Likes
                     value={cat.rating}
-                    text={`${cat.numReviews} reviews`}
+                    text={`${cat.numReviews} likes`}
                   />
                 </ListGroup.Item>
-                <ListGroup.Item>Price: ${cat.price}</ListGroup.Item>
+                <ListGroup.Item>Age: Year{cat.age}</ListGroup.Item>
                 <ListGroup.Item>
                   Description: {cat.description}
                 </ListGroup.Item>
@@ -95,44 +95,60 @@ const CatScreen = ({ history, match }) => {
                 <ListGroup variant='flush'>
                   <ListGroup.Item>
                     <Row>
-                      <Col>Price:</Col>
+                      <Col>Age:</Col>
                       <Col>
-                        <strong>${cat.price}</strong>
+                        <strong>Year{cat.age}</strong>
+                      </Col>
+                    </Row>
+                  </ListGroup.Item>
+
+            
+                  <ListGroup.Item>
+                    <Row>
+                      <Col>Gender:</Col>
+                      <Col>
+                        <strong>{cat.gender}</strong>
+                      </Col>
+                    </Row>
+                  </ListGroup.Item>
+
+
+                  <ListGroup.Item>
+                    <Row>
+                      <Col>Status:</Col>
+                      <Col>
+                        {cat.countInStock > 0 ? 'Abandoend' : 'Out Of Stock'}
                       </Col>
                     </Row>
                   </ListGroup.Item>
 
                   <ListGroup.Item>
                     <Row>
-                      <Col>Status:</Col>
+                      <Col>Features:</Col>
                       <Col>
-                        {cat.countInStock > 0 ? 'In Stock' : 'Out Of Stock'}
+                        <strong>{cat.feature}</strong>
                       </Col>
                     </Row>
                   </ListGroup.Item>
 
-                  {cat.countInStock > 0 && (
-                    <ListGroup.Item>
-                      <Row>
-                        <Col>Qty</Col>
-                        <Col>
-                          <Form.Control
-                            as='select'
-                            value={qty}
-                            onChange={(e) => setQty(e.target.value)}
-                          >
-                            {[...Array(cat.countInStock).keys()].map(
-                              (x) => (
-                                <option key={x + 1} value={x + 1}>
-                                  {x + 1}
-                                </option>
-                              )
-                            )}
-                          </Form.Control>
-                        </Col>
-                      </Row>
-                    </ListGroup.Item>
-                  )}
+                  <ListGroup.Item>
+                    <Row>
+                      <Col>Contact No:</Col>
+                      <Col>
+                        <strong>{cat.contactno}</strong>
+                      </Col>
+                    </Row>
+                  </ListGroup.Item>
+
+                  <ListGroup.Item>
+                    <Row>
+                      <Col>Address:</Col>
+                      <Col>
+                        <strong>{cat.address}</strong>
+                      </Col>
+                    </Row>
+                  </ListGroup.Item>
+
 
                   <ListGroup.Item>
                     <Button
