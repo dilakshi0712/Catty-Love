@@ -116,11 +116,11 @@ const CatEditScreen = ({ match, history }) => {
               ></Form.Control>
             </Form.Group>
 
-            <Form.Group controlId='price'>
-              <Form.Label>Price</Form.Label>
+            <Form.Group controlId='age'>
+              <Form.Label>Age</Form.Label>
               <Form.Control
                 type='number'
-                placeholder='Enter price'
+                placeholder='Enter age'
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
               ></Form.Control>
@@ -143,11 +143,11 @@ const CatEditScreen = ({ match, history }) => {
               {uploading && <Loader />}
             </Form.Group>
 
-            <Form.Group controlId='brand'>
-              <Form.Label>Brand</Form.Label>
+            <Form.Group controlId='gender'>
+              <Form.Label>Gender</Form.Label>
               <Form.Control
                 type='text'
-                placeholder='Enter brand'
+                placeholder='Enter gender'
                 value={brand}
                 onChange={(e) => setBrand(e.target.value)}
               ></Form.Control>
@@ -163,11 +163,11 @@ const CatEditScreen = ({ match, history }) => {
               ></Form.Control>
             </Form.Group>
 
-            <Form.Group controlId='category'>
-              <Form.Label>Category</Form.Label>
+            <Form.Group controlId='contactno'>
+              <Form.Label>Contact Number</Form.Label>
               <Form.Control
                 type='text'
-                placeholder='Enter category'
+                placeholder='Enter number'
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
               ></Form.Control>

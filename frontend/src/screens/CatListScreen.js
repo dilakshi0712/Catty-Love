@@ -97,9 +97,9 @@ const CatListScreen = ({ history, match }) => {
               <tr>
                 <th>ID</th>
                 <th>NAME</th>
-                <th>PRICE</th>
-                <th>CATEGORY</th>
-                <th>BRAND</th>
+                <th>No of Likes</th>
+                <th>DESCRIPTION</th>
+                <th>GENDER</th>
                 <th></th>
               </tr>
             </thead>
@@ -108,9 +108,9 @@ const CatListScreen = ({ history, match }) => {
                 <tr key={cat._id}>
                   <td>{cat._id}</td>
                   <td>{cat.name}</td>
-                  <td>${cat.price}</td>
-                  <td>{cat.category}</td>
-                  <td>{cat.brand}</td>
+                  <td>{cat.likes}</td>
+                  <td>{cat.descriptions}</td>
+                  <td>{cat.gender}</td>
                   <td>
                     <LinkContainer to={`/admin/cat/${cat._id}/edit`}>
                       <Button variant='light' className='btn-sm'>
