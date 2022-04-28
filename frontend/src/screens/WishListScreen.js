@@ -3,43 +3,39 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap'
 import Message from '../components/Message'
-import { addToCart, removeFromCart } from '../actions/cartActions'
+import { addToWishList, removeFromWishList } from '../actions/wishListActions'
 
-const CartScreen = ({ match, location, history }) => {
+const WishListScreen = ({ match, location, history }) => {
   const catId = match.params.id
 
   const qty = location.search ? Number(location.search.split('=')[1]) : 1
 
   const dispatch = useDispatch()
 
-  const cart = useSelector((state) => state.cart)
-  const { cartItems } = cart
+  const wishList = useSelector((state) => state.wishList)
+  const { wishListItems } = wishList
 
   useEffect(() => {
     if (catId) {
-      dispatch(addToCart(catId, qty))
+      dispatch(addToWishList(catId, qty))
     }
   }, [dispatch, catId, qty])
 
-  const removeFromCartHandler = (id) => {
-    dispatch(removeFromCart(id))
-  }
-
-  const checkoutHandler = () => {
-    history.push('/login?redirect=shipping')
+  const removeFromWishListHandler = (id) => {
+    dispatch(removeFromWishList(id))
   }
 
   return (
     <Row>
-      <Col md={8}>
-        <h1>Shopping Cart</h1>
-        {cartItems.length === 0 ? (
+      <Col md={12}>
+        <h1>Shopping WishList</h1>
+        {wishListItems.length === 0 ? (
           <Message>
-            Your cart is empty <Link to='/'>Go Back</Link>
+            Your wishList is empty <Link to='/'>Go Back</Link>
           </Message>
         ) : (
           <ListGroup variant='flush'>
-            {cartItems.map((item) => (
+            {wishListItems.map((item) => (
               <ListGroup.Item key={item.cat}>
                 <Row>
                   <Col md={2}>
@@ -55,7 +51,7 @@ const CartScreen = ({ match, location, history }) => {
                       value={item.qty}
                       onChange={(e) =>
                         dispatch(
-                          addToCart(item.cat, Number(e.target.value))
+                          addToWishList(item.cat, Number(e.target.value))
                         )
                       }
                     >
@@ -70,7 +66,7 @@ const CartScreen = ({ match, location, history }) => {
                     <Button
                       type='button'
                       variant='light'
-                      onClick={() => removeFromCartHandler(item.cat)}
+                      onClick={() => removeFromWishListHandler(item.cat)}
                     >
                       <i className='fas fa-trash'></i>
                     </Button>
@@ -81,34 +77,8 @@ const CartScreen = ({ match, location, history }) => {
           </ListGroup>
         )}
       </Col>
-      <Col md={4}>
-        <Card>
-          <ListGroup variant='flush'>
-            <ListGroup.Item>
-              <h2>
-                Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)})
-                items
-              </h2>
-              $
-              {cartItems
-                .reduce((acc, item) => acc + item.qty * item.price, 0)
-                .toFixed(2)}
-            </ListGroup.Item>
-            <ListGroup.Item>
-              <Button
-                type='button'
-                className='btn-block'
-                disabled={cartItems.length === 0}
-                onClick={checkoutHandler}
-              >
-                Proceed To Checkout
-              </Button>
-            </ListGroup.Item>
-          </ListGroup>
-        </Card>
-      </Col>
     </Row>
   )
 }
 
-export default CartScreen
+export default WishListScreen

@@ -27,9 +27,9 @@ const Header = () => {
           <Navbar.Collapse id='basic-navbar-nav'>
             <Route render={({ history }) => <SearchBox history={history} />} />
             <Nav className='ml-auto'>
-              <LinkContainer to='/cart'>
+              <LinkContainer to='/wishList'>
                 <Nav.Link>
-                  <i className='fas fa-shopping-cart'></i> Cart
+                  <i className='fas fa-shopping-wishList'></i> WishList
                 </Nav.Link>
               </LinkContainer>
               {userInfo ? (
@@ -55,9 +55,6 @@ const Header = () => {
                   </LinkContainer>
                   <LinkContainer to='/admin/catlist'>
                     <NavDropdown.Item>Cats</NavDropdown.Item>
-                  </LinkContainer>
-                  <LinkContainer to='/admin/orderlist'>
-                    <NavDropdown.Item>Orders</NavDropdown.Item>
                   </LinkContainer>
                 </NavDropdown>
               )}

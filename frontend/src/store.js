@@ -10,7 +10,7 @@ import {
   catReviewCreateReducer,
   catTopRatedReducer,
 } from './reducers/catReducers'
-import { cartReducer } from './reducers/cartReducers'
+import { wishListReducer } from './reducers/wishListReducers'
 import {
   userLoginReducer,
   userRegisterReducer,
@@ -20,14 +20,6 @@ import {
   userDeleteReducer,
   userUpdateReducer,
 } from './reducers/userReducers'
-import {
-  orderCreateReducer,
-  orderDetailsReducer,
-  orderPayReducer,
-  orderDeliverReducer,
-  orderListMyReducer,
-  orderListReducer,
-} from './reducers/orderReducers'
 
 const reducer = combineReducers({
   catList: catListReducer,
@@ -37,7 +29,7 @@ const reducer = combineReducers({
   catUpdate: catUpdateReducer,
   catReviewCreate: catReviewCreateReducer,
   catTopRated: catTopRatedReducer,
-  cart: cartReducer,
+  wishList: wishListReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
@@ -45,16 +37,10 @@ const reducer = combineReducers({
   userList: userListReducer,
   userDelete: userDeleteReducer,
   userUpdate: userUpdateReducer,
-  orderCreate: orderCreateReducer,
-  orderDetails: orderDetailsReducer,
-  orderPay: orderPayReducer,
-  orderDeliver: orderDeliverReducer,
-  orderListMy: orderListMyReducer,
-  orderList: orderListReducer,
 })
 
-const cartItemsFromStorage = localStorage.getItem('cartItems')
-  ? JSON.parse(localStorage.getItem('cartItems'))
+const wishListItemsFromStorage = localStorage.getItem('wishListItems')
+  ? JSON.parse(localStorage.getItem('wishListItems'))
   : []
 
 const userInfoFromStorage = localStorage.getItem('userInfo')
@@ -66,8 +52,8 @@ const shippingAddressFromStorage = localStorage.getItem('shippingAddress')
   : {}
 
 const initialState = {
-  cart: {
-    cartItems: cartItemsFromStorage,
+  wishList: {
+    wishListItems: wishListItemsFromStorage,
     shippingAddress: shippingAddressFromStorage,
   },
   userLogin: { userInfo: userInfoFromStorage },

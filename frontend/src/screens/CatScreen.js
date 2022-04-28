@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Row, Col, Image, ListGroup, Card, Button, Form } from 'react-bootstrap'
-import Rating from '../components/Rating'
+import Likes from '../components/Likes'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import Meta from '../components/Meta'
@@ -14,7 +14,7 @@ import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/catConstants'
 
 const CatScreen = ({ history, match }) => {
   const [qty, setQty] = useState(1)
-  const [rating, setRating] = useState(0)
+  const [rating, setLikes] = useState(0)
   const [comment, setComment] = useState('')
 
   const dispatch = useDispatch()
@@ -34,7 +34,7 @@ const CatScreen = ({ history, match }) => {
 
   useEffect(() => {
     if (successCatReview) {
-      setRating(0)
+      setLikes(0)
       setComment('')
     }
     if (!cat._id || cat._id !== match.params.id) {
@@ -43,8 +43,8 @@ const CatScreen = ({ history, match }) => {
     }
   }, [dispatch, match, successCatReview])
 
-  const addToCartHandler = () => {
-    history.push(`/cart/${match.params.id}?qty=${qty}`)
+  const addToWishListHandler = () => {
+    history.push(`/wishList/${match.params.id}?qty=${qty}`)
   }
 
   const submitHandler = (e) => {
@@ -79,7 +79,7 @@ const CatScreen = ({ history, match }) => {
                   <h3>{cat.name}</h3>
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  <Rating
+                  <Likes
                     value={cat.rating}
                     text={`${cat.numReviews} reviews`}
                   />
@@ -136,12 +136,12 @@ const CatScreen = ({ history, match }) => {
 
                   <ListGroup.Item>
                     <Button
-                      onClick={addToCartHandler}
+                      onClick={addToWishListHandler}
                       className='btn-block'
                       type='button'
                       disabled={cat.countInStock === 0}
                     >
-                      Add To Cart
+                      Add To WishList
                     </Button>
                   </ListGroup.Item>
                 </ListGroup>
@@ -156,7 +156,7 @@ const CatScreen = ({ history, match }) => {
                 {cat.reviews.map((review) => (
                   <ListGroup.Item key={review._id}>
                     <strong>{review.name}</strong>
-                    <Rating value={review.rating} />
+                    <Likes value={review.rating} />
                     <p>{review.createdAt.substring(0, 10)}</p>
                     <p>{review.comment}</p>
                   </ListGroup.Item>
@@ -175,11 +175,11 @@ const CatScreen = ({ history, match }) => {
                   {userInfo ? (
                     <Form onSubmit={submitHandler}>
                       <Form.Group controlId='rating'>
-                        <Form.Label>Rating</Form.Label>
+                        <Form.Label>Likes</Form.Label>
                         <Form.Control
                           as='select'
                           value={rating}
-                          onChange={(e) => setRating(e.target.value)}
+                          onChange={(e) => setLikes(e.target.value)}
                         >
                           <option value=''>Select...</option>
                           <option value='1'>1 - Poor</option>

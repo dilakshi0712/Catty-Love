@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Card } from 'react-bootstrap'
-import Rating from './Rating'
+import Likes from './Likes'
 
 const Cat = ({ cat }) => {
   return (
@@ -18,7 +18,7 @@ const Cat = ({ cat }) => {
         </Link>
 
         <Card.Text as='div'>
-          <Rating
+          <Likes
             value={cat.rating}
             text={`${cat.numReviews} reviews`}
           />
