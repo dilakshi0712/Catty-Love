@@ -6,11 +6,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import FormContainer from '../components/FormContainer'
-import { listProductDetails, updateProduct } from '../actions/productActions'
-import { PRODUCT_UPDATE_RESET } from '../constants/productConstants'
+import { listCatDetails, updateCat } from '../actions/catActions'
+import { PRODUCT_UPDATE_RESET } from '../constants/catConstants'
 
-const ProductEditScreen = ({ match, history }) => {
-  const productId = match.params.id
+const CatEditScreen = ({ match, history }) => {
+  const catId = match.params.id
 
   const [name, setName] = useState('')
   const [price, setPrice] = useState(0)
@@ -23,34 +23,34 @@ const ProductEditScreen = ({ match, history }) => {
 
   const dispatch = useDispatch()
 
-  const productDetails = useSelector((state) => state.productDetails)
-  const { loading, error, product } = productDetails
+  const catDetails = useSelector((state) => state.catDetails)
+  const { loading, error, cat } = catDetails
 
-  const productUpdate = useSelector((state) => state.productUpdate)
+  const catUpdate = useSelector((state) => state.catUpdate)
   const {
     loading: loadingUpdate,
     error: errorUpdate,
     success: successUpdate,
-  } = productUpdate
+  } = catUpdate
 
   useEffect(() => {
     if (successUpdate) {
       dispatch({ type: PRODUCT_UPDATE_RESET })
-      history.push('/admin/productlist')
+      history.push('/admin/catlist')
     } else {
-      if (!product.name || product._id !== productId) {
-        dispatch(listProductDetails(productId))
+      if (!cat.name || cat._id !== catId) {
+        dispatch(listCatDetails(catId))
       } else {
-        setName(product.name)
-        setPrice(product.price)
-        setImage(product.image)
-        setBrand(product.brand)
-        setCategory(product.category)
-        setCountInStock(product.countInStock)
-        setDescription(product.description)
+        setName(cat.name)
+        setPrice(cat.price)
+        setImage(cat.image)
+        setBrand(cat.brand)
+        setCategory(cat.category)
+        setCountInStock(cat.countInStock)
+        setDescription(cat.description)
       }
     }
-  }, [dispatch, history, productId, product, successUpdate])
+  }, [dispatch, history, catId, cat, successUpdate])
 
   const uploadFileHandler = async (e) => {
     const file = e.target.files[0]
@@ -78,8 +78,8 @@ const ProductEditScreen = ({ match, history }) => {
   const submitHandler = (e) => {
     e.preventDefault()
     dispatch(
-      updateProduct({
-        _id: productId,
+      updateCat({
+        _id: catId,
         name,
         price,
         image,
@@ -93,11 +93,11 @@ const ProductEditScreen = ({ match, history }) => {
 
   return (
     <>
-      <Link to='/admin/productlist' className='btn btn-light my-3'>
+      <Link to='/admin/catlist' className='btn btn-light my-3'>
         Go Back
       </Link>
       <FormContainer>
-        <h1>Edit Product</h1>
+        <h1>Edit Cat</h1>
         {loadingUpdate && <Loader />}
         {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
         {loading ? (
@@ -193,4 +193,4 @@ const ProductEditScreen = ({ match, history }) => {
   )
 }
 
-export default ProductEditScreen
+export default CatEditScreen

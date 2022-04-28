@@ -7,41 +7,41 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 import Meta from '../components/Meta'
 import {
-  listProductDetails,
-  createProductReview,
-} from '../actions/productActions'
-import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants'
+  listCatDetails,
+  createCatReview,
+} from '../actions/catActions'
+import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/catConstants'
 
-const ProductScreen = ({ history, match }) => {
+const CatScreen = ({ history, match }) => {
   const [qty, setQty] = useState(1)
   const [rating, setRating] = useState(0)
   const [comment, setComment] = useState('')
 
   const dispatch = useDispatch()
 
-  const productDetails = useSelector((state) => state.productDetails)
-  const { loading, error, product } = productDetails
+  const catDetails = useSelector((state) => state.catDetails)
+  const { loading, error, cat } = catDetails
 
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
 
-  const productReviewCreate = useSelector((state) => state.productReviewCreate)
+  const catReviewCreate = useSelector((state) => state.catReviewCreate)
   const {
-    success: successProductReview,
-    loading: loadingProductReview,
-    error: errorProductReview,
-  } = productReviewCreate
+    success: successCatReview,
+    loading: loadingCatReview,
+    error: errorCatReview,
+  } = catReviewCreate
 
   useEffect(() => {
-    if (successProductReview) {
+    if (successCatReview) {
       setRating(0)
       setComment('')
     }
-    if (!product._id || product._id !== match.params.id) {
-      dispatch(listProductDetails(match.params.id))
+    if (!cat._id || cat._id !== match.params.id) {
+      dispatch(listCatDetails(match.params.id))
       dispatch({ type: PRODUCT_CREATE_REVIEW_RESET })
     }
-  }, [dispatch, match, successProductReview])
+  }, [dispatch, match, successCatReview])
 
   const addToCartHandler = () => {
     history.push(`/cart/${match.params.id}?qty=${qty}`)
@@ -50,7 +50,7 @@ const ProductScreen = ({ history, match }) => {
   const submitHandler = (e) => {
     e.preventDefault()
     dispatch(
-      createProductReview(match.params.id, {
+      createCatReview(match.params.id, {
         rating,
         comment,
       })
@@ -68,25 +68,25 @@ const ProductScreen = ({ history, match }) => {
         <Message variant='danger'>{error}</Message>
       ) : (
         <>
-          <Meta title={product.name} />
+          <Meta title={cat.name} />
           <Row>
             <Col md={6}>
-              <Image src={product.image} alt={product.name} fluid />
+              <Image src={cat.image} alt={cat.name} fluid />
             </Col>
             <Col md={3}>
               <ListGroup variant='flush'>
                 <ListGroup.Item>
-                  <h3>{product.name}</h3>
+                  <h3>{cat.name}</h3>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Rating
-                    value={product.rating}
-                    text={`${product.numReviews} reviews`}
+                    value={cat.rating}
+                    text={`${cat.numReviews} reviews`}
                   />
                 </ListGroup.Item>
-                <ListGroup.Item>Price: ${product.price}</ListGroup.Item>
+                <ListGroup.Item>Price: ${cat.price}</ListGroup.Item>
                 <ListGroup.Item>
-                  Description: {product.description}
+                  Description: {cat.description}
                 </ListGroup.Item>
               </ListGroup>
             </Col>
@@ -97,7 +97,7 @@ const ProductScreen = ({ history, match }) => {
                     <Row>
                       <Col>Price:</Col>
                       <Col>
-                        <strong>${product.price}</strong>
+                        <strong>${cat.price}</strong>
                       </Col>
                     </Row>
                   </ListGroup.Item>
@@ -106,12 +106,12 @@ const ProductScreen = ({ history, match }) => {
                     <Row>
                       <Col>Status:</Col>
                       <Col>
-                        {product.countInStock > 0 ? 'In Stock' : 'Out Of Stock'}
+                        {cat.countInStock > 0 ? 'In Stock' : 'Out Of Stock'}
                       </Col>
                     </Row>
                   </ListGroup.Item>
 
-                  {product.countInStock > 0 && (
+                  {cat.countInStock > 0 && (
                     <ListGroup.Item>
                       <Row>
                         <Col>Qty</Col>
@@ -121,7 +121,7 @@ const ProductScreen = ({ history, match }) => {
                             value={qty}
                             onChange={(e) => setQty(e.target.value)}
                           >
-                            {[...Array(product.countInStock).keys()].map(
+                            {[...Array(cat.countInStock).keys()].map(
                               (x) => (
                                 <option key={x + 1} value={x + 1}>
                                   {x + 1}
@@ -139,7 +139,7 @@ const ProductScreen = ({ history, match }) => {
                       onClick={addToCartHandler}
                       className='btn-block'
                       type='button'
-                      disabled={product.countInStock === 0}
+                      disabled={cat.countInStock === 0}
                     >
                       Add To Cart
                     </Button>
@@ -151,9 +151,9 @@ const ProductScreen = ({ history, match }) => {
           <Row>
             <Col md={6}>
               <h2>Reviews</h2>
-              {product.reviews.length === 0 && <Message>No Reviews</Message>}
+              {cat.reviews.length === 0 && <Message>No Reviews</Message>}
               <ListGroup variant='flush'>
-                {product.reviews.map((review) => (
+                {cat.reviews.map((review) => (
                   <ListGroup.Item key={review._id}>
                     <strong>{review.name}</strong>
                     <Rating value={review.rating} />
@@ -163,14 +163,14 @@ const ProductScreen = ({ history, match }) => {
                 ))}
                 <ListGroup.Item>
                   <h2>Write a Customer Review</h2>
-                  {successProductReview && (
+                  {successCatReview && (
                     <Message variant='success'>
                       Review submitted successfully
                     </Message>
                   )}
-                  {loadingProductReview && <Loader />}
-                  {errorProductReview && (
-                    <Message variant='danger'>{errorProductReview}</Message>
+                  {loadingCatReview && <Loader />}
+                  {errorCatReview && (
+                    <Message variant='danger'>{errorCatReview}</Message>
                   )}
                   {userInfo ? (
                     <Form onSubmit={submitHandler}>
@@ -199,7 +199,7 @@ const ProductScreen = ({ history, match }) => {
                         ></Form.Control>
                       </Form.Group>
                       <Button
-                        disabled={loadingProductReview}
+                        disabled={loadingCatReview}
                         type='submit'
                         variant='primary'
                       >
@@ -221,4 +221,4 @@ const ProductScreen = ({ history, match }) => {
   )
 }
 
-export default ProductScreen
+export default CatScreen

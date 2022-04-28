@@ -4,16 +4,16 @@ import { Carousel, Image } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from './Loader'
 import Message from './Message'
-import { listTopProducts } from '../actions/productActions'
+import { listTopCats } from '../actions/catActions'
 
-const ProductCarousel = () => {
+const CatCarousel = () => {
   const dispatch = useDispatch()
 
-  const productTopRated = useSelector((state) => state.productTopRated)
-  const { loading, error, products } = productTopRated
+  const catTopRated = useSelector((state) => state.catTopRated)
+  const { loading, error, cats } = catTopRated
 
   useEffect(() => {
-    dispatch(listTopProducts())
+    dispatch(listTopCats())
   }, [dispatch])
 
   return loading ? (
@@ -22,13 +22,13 @@ const ProductCarousel = () => {
     <Message variant='danger'>{error}</Message>
   ) : (
     <Carousel pause='hover' className='bg-dark'>
-      {products.map((product) => (
-        <Carousel.Item key={product._id}>
-          <Link to={`/product/${product._id}`}>
-            <Image src={product.image} alt={product.name} fluid />
+      {cats.map((cat) => (
+        <Carousel.Item key={cat._id}>
+          <Link to={`/cat/${cat._id}`}>
+            <Image src={cat.image} alt={cat.name} fluid />
             <Carousel.Caption className='carousel-caption'>
               <h2>
-                {product.name} (${product.price})
+                {cat.name} (${cat.price})
               </h2>
             </Carousel.Caption>
           </Link>
@@ -38,4 +38,4 @@ const ProductCarousel = () => {
   )
 }
 
-export default ProductCarousel
+export default CatCarousel

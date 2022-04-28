@@ -16,7 +16,7 @@ const reviewSchema = mongoose.Schema(
   }
 )
 
-const productSchema = mongoose.Schema(
+const catSchema = mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
@@ -70,6 +70,6 @@ const productSchema = mongoose.Schema(
   }
 )
 
-const Product = mongoose.model('Product', productSchema)
+const Cat = mongoose.model('Cat', catSchema)
 
-export default Product
+export default Cat

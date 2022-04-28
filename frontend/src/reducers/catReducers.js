@@ -23,16 +23,16 @@ import {
   PRODUCT_TOP_REQUEST,
   PRODUCT_TOP_SUCCESS,
   PRODUCT_TOP_FAIL,
-} from '../constants/productConstants'
+} from '../constants/catConstants'
 
-export const productListReducer = (state = { products: [] }, action) => {
+export const catListReducer = (state = { cats: [] }, action) => {
   switch (action.type) {
     case PRODUCT_LIST_REQUEST:
-      return { loading: true, products: [] }
+      return { loading: true, cats: [] }
     case PRODUCT_LIST_SUCCESS:
       return {
         loading: false,
-        products: action.payload.products,
+        cats: action.payload.cats,
         pages: action.payload.pages,
         page: action.payload.page,
       }
@@ -43,15 +43,15 @@ export const productListReducer = (state = { products: [] }, action) => {
   }
 }
 
-export const productDetailsReducer = (
-  state = { product: { reviews: [] } },
+export const catDetailsReducer = (
+  state = { cat: { reviews: [] } },
   action
 ) => {
   switch (action.type) {
     case PRODUCT_DETAILS_REQUEST:
       return { ...state, loading: true }
     case PRODUCT_DETAILS_SUCCESS:
-      return { loading: false, product: action.payload }
+      return { loading: false, cat: action.payload }
     case PRODUCT_DETAILS_FAIL:
       return { loading: false, error: action.payload }
     default:
@@ -59,7 +59,7 @@ export const productDetailsReducer = (
   }
 }
 
-export const productDeleteReducer = (state = {}, action) => {
+export const catDeleteReducer = (state = {}, action) => {
   switch (action.type) {
     case PRODUCT_DELETE_REQUEST:
       return { loading: true }
@@ -72,12 +72,12 @@ export const productDeleteReducer = (state = {}, action) => {
   }
 }
 
-export const productCreateReducer = (state = {}, action) => {
+export const catCreateReducer = (state = {}, action) => {
   switch (action.type) {
     case PRODUCT_CREATE_REQUEST:
       return { loading: true }
     case PRODUCT_CREATE_SUCCESS:
-      return { loading: false, success: true, product: action.payload }
+      return { loading: false, success: true, cat: action.payload }
     case PRODUCT_CREATE_FAIL:
       return { loading: false, error: action.payload }
     case PRODUCT_CREATE_RESET:
@@ -87,22 +87,22 @@ export const productCreateReducer = (state = {}, action) => {
   }
 }
 
-export const productUpdateReducer = (state = { product: {} }, action) => {
+export const catUpdateReducer = (state = { cat: {} }, action) => {
   switch (action.type) {
     case PRODUCT_UPDATE_REQUEST:
       return { loading: true }
     case PRODUCT_UPDATE_SUCCESS:
-      return { loading: false, success: true, product: action.payload }
+      return { loading: false, success: true, cat: action.payload }
     case PRODUCT_UPDATE_FAIL:
       return { loading: false, error: action.payload }
     case PRODUCT_UPDATE_RESET:
-      return { product: {} }
+      return { cat: {} }
     default:
       return state
   }
 }
 
-export const productReviewCreateReducer = (state = {}, action) => {
+export const catReviewCreateReducer = (state = {}, action) => {
   switch (action.type) {
     case PRODUCT_CREATE_REVIEW_REQUEST:
       return { loading: true }
@@ -117,12 +117,12 @@ export const productReviewCreateReducer = (state = {}, action) => {
   }
 }
 
-export const productTopRatedReducer = (state = { products: [] }, action) => {
+export const catTopRatedReducer = (state = { cats: [] }, action) => {
   switch (action.type) {
     case PRODUCT_TOP_REQUEST:
-      return { loading: true, products: [] }
+      return { loading: true, cats: [] }
     case PRODUCT_TOP_SUCCESS:
-      return { loading: false, products: action.payload }
+      return { loading: false, cats: action.payload }
     case PRODUCT_TOP_FAIL:
       return { loading: false, error: action.payload }
     default:

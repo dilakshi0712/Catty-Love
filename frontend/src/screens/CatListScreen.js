@@ -6,34 +6,34 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 import Paginate from '../components/Paginate'
 import {
-  listProducts,
-  deleteProduct,
-  createProduct,
-} from '../actions/productActions'
-import { PRODUCT_CREATE_RESET } from '../constants/productConstants'
+  listCats,
+  deleteCat,
+  createCat,
+} from '../actions/catActions'
+import { PRODUCT_CREATE_RESET } from '../constants/catConstants'
 
-const ProductListScreen = ({ history, match }) => {
+const CatListScreen = ({ history, match }) => {
   const pageNumber = match.params.pageNumber || 1
 
   const dispatch = useDispatch()
 
-  const productList = useSelector((state) => state.productList)
-  const { loading, error, products, page, pages } = productList
+  const catList = useSelector((state) => state.catList)
+  const { loading, error, cats, page, pages } = catList
 
-  const productDelete = useSelector((state) => state.productDelete)
+  const catDelete = useSelector((state) => state.catDelete)
   const {
     loading: loadingDelete,
     error: errorDelete,
     success: successDelete,
-  } = productDelete
+  } = catDelete
 
-  const productCreate = useSelector((state) => state.productCreate)
+  const catCreate = useSelector((state) => state.catCreate)
   const {
     loading: loadingCreate,
     error: errorCreate,
     success: successCreate,
-    product: createdProduct,
-  } = productCreate
+    cat: createdCat,
+  } = catCreate
 
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
@@ -46,9 +46,9 @@ const ProductListScreen = ({ history, match }) => {
     }
 
     if (successCreate) {
-      history.push(`/admin/product/${createdProduct._id}/edit`)
+      history.push(`/admin/cat/${createdCat._id}/edit`)
     } else {
-      dispatch(listProducts('', pageNumber))
+      dispatch(listCats('', pageNumber))
     }
   }, [
     dispatch,
@@ -56,29 +56,29 @@ const ProductListScreen = ({ history, match }) => {
     userInfo,
     successDelete,
     successCreate,
-    createdProduct,
+    createdCat,
     pageNumber,
   ])
 
   const deleteHandler = (id) => {
     if (window.confirm('Are you sure')) {
-      dispatch(deleteProduct(id))
+      dispatch(deleteCat(id))
     }
   }
 
-  const createProductHandler = () => {
-    dispatch(createProduct())
+  const createCatHandler = () => {
+    dispatch(createCat())
   }
 
   return (
     <>
       <Row className='align-items-center'>
         <Col>
-          <h1>Products</h1>
+          <h1>Cats</h1>
         </Col>
         <Col className='text-right'>
-          <Button className='my-3' onClick={createProductHandler}>
-            <i className='fas fa-plus'></i> Create Product
+          <Button className='my-3' onClick={createCatHandler}>
+            <i className='fas fa-plus'></i> Create Cat
           </Button>
         </Col>
       </Row>
@@ -104,15 +104,15 @@ const ProductListScreen = ({ history, match }) => {
               </tr>
             </thead>
             <tbody>
-              {products.map((product) => (
-                <tr key={product._id}>
-                  <td>{product._id}</td>
-                  <td>{product.name}</td>
-                  <td>${product.price}</td>
-                  <td>{product.category}</td>
-                  <td>{product.brand}</td>
+              {cats.map((cat) => (
+                <tr key={cat._id}>
+                  <td>{cat._id}</td>
+                  <td>{cat.name}</td>
+                  <td>${cat.price}</td>
+                  <td>{cat.category}</td>
+                  <td>{cat.brand}</td>
                   <td>
-                    <LinkContainer to={`/admin/product/${product._id}/edit`}>
+                    <LinkContainer to={`/admin/cat/${cat._id}/edit`}>
                       <Button variant='light' className='btn-sm'>
                         <i className='fas fa-edit'></i>
                       </Button>
@@ -120,7 +120,7 @@ const ProductListScreen = ({ history, match }) => {
                     <Button
                       variant='danger'
                       className='btn-sm'
-                      onClick={() => deleteHandler(product._id)}
+                      onClick={() => deleteHandler(cat._id)}
                     >
                       <i className='fas fa-trash'></i>
                     </Button>
@@ -136,4 +136,4 @@ const ProductListScreen = ({ history, match }) => {
   )
 }
 
-export default ProductListScreen
+export default CatListScreen
