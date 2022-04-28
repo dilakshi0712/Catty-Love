@@ -20,11 +20,15 @@ const Cat = ({ cat }) => {
         <Card.Text as='div'>
           <Likes
             value={cat.rating}
-            text={`${cat.numReviews} reviews`}
+            text={`${cat.numReviews} likes`}
           />
         </Card.Text>
 
-        <Card.Text as='h3'>${cat.age}</Card.Text>
+        <Card.Text as='div'>
+            <strong>{cat.gender}</strong>
+          </Card.Text>
+
+        <Card.Text as='h3'>Year{cat.age}</Card.Text>
       </Card.Body>
     </Card>
   )
