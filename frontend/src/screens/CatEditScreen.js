@@ -1,13 +1,15 @@
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Form, Button } from 'react-bootstrap'
+import { Form, Button, Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import FormContainer from '../components/FormContainer'
 import { listCatDetails, updateCat } from '../actions/catActions'
 import { PRODUCT_UPDATE_RESET } from '../constants/catConstants'
+import { DEFAULT_LOCATION } from '../constants/googleMapConstants'
+import MapContainer from '../components/MapContainer'
 
 const CatEditScreen = ({ match, history }) => {
   const catId = match.params.id
@@ -22,6 +24,19 @@ const CatEditScreen = ({ match, history }) => {
   const [feature, setFeature] = useState('')
   const [address, setAddress] = useState('')
   const [uploading, setUploading] = useState(false)
+  const [lat, setLat] = useState('')
+  const [lng, setLng] = useState('')
+
+  const LOCATION = {
+    lat: lat ? lat : DEFAULT_LOCATION.lat,
+    lng: lng ? lng : DEFAULT_LOCATION.lng,
+  }
+
+  const markerDragEnd = (coord) => {
+    const { latLng } = coord
+    setLat(latLng.lat())
+    setLng(latLng.lng())
+  }
 
   const dispatch = useDispatch()
 
@@ -52,6 +67,8 @@ const CatEditScreen = ({ match, history }) => {
         setDescription(cat.description)
         setFeature(cat.feature)
         setAddress(cat.address)
+        setLat(cat.lat)
+        setLng(cat.lng)
       }
     }
   }, [dispatch, history, catId, cat, successUpdate])
@@ -208,6 +225,39 @@ const CatEditScreen = ({ match, history }) => {
                 onChange={(e) => setAddress(e.target.value)}
               ></Form.Control>
             </Form.Group>
+
+            <h6>Select your location!</h6>
+            <MapContainer
+              onMarkerDragEnd={markerDragEnd}
+              location={LOCATION}
+              draggable={true}
+            />
+            <Row>
+              <Col md={6}>
+                <Form.Group controlId='lat'>
+                  <Form.Label></Form.Label>
+                  <Form.Control
+                    type='text'
+                    placeholder='lat'
+                    value={lat}
+                    readOnly
+                    required
+                  ></Form.Control>
+                </Form.Group>
+              </Col>
+              <Col md={6}>
+                <Form.Group controlId='lng'>
+                  <Form.Label></Form.Label>
+                  <Form.Control
+                    type='text'
+                    placeholder='lng'
+                    value={lng}
+                    readOnly
+                    required
+                  ></Form.Control>
+                </Form.Group>
+              </Col>
+            </Row>
 
             <Button type='submit' variant='primary'>
               Update

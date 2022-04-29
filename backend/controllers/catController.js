@@ -70,6 +70,8 @@ const createCat = asyncHandler(async (req, res) => {
     description: 'Sample description',
     feature: 'Sample features',
     address: 'Sample address',
+    lat: 0,
+    lng: 0,
   })
 
   const createdCat = await cat.save()
@@ -90,6 +92,8 @@ const updateCat = asyncHandler(async (req, res) => {
     countInStock,
     feature,
     address,
+    lat,
+    lng
   } = req.body
 
   const cat = await Cat.findById(req.params.id)
@@ -104,6 +108,8 @@ const updateCat = asyncHandler(async (req, res) => {
     cat.contactno = contactno
     cat.countInStock = countInStock
     cat.address = address
+    cat.lat = lat
+    cat.lng = lng
 
     const updatedCat = await cat.save()
     res.json(updatedCat)
