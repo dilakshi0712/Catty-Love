@@ -110,6 +110,8 @@ const CatEditScreen = ({ match, history }) => {
         feature,
         countInStock,
         address,
+        lat,
+        lng
       })
     )
   }

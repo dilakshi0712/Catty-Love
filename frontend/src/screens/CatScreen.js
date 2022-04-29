@@ -22,8 +22,6 @@ const CatScreen = ({ history, match }) => {
   const [lng, setLng] = useState('')
 
   const LOCATION = {
-    // lat: lat ,
-    // lng: lng
     lat: lat ? lat : DEFAULT_LOCATION.lat,
     lng: lng ? lng : DEFAULT_LOCATION.lng,
   }
@@ -191,7 +189,7 @@ const CatScreen = ({ history, match }) => {
               <MapContainer
                 onMarkerDragEnd={markerDragEnd}
                 location={LOCATION}
-                draggable={true}
+                draggable={false}
               />
             </Col>
           </Row>
