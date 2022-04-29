@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap'
 import Message from '../components/Message'
 import { addToWishList, removeFromWishList } from '../actions/wishListActions'
+import Likes from '../components/Likes'
 
 const WishListScreen = ({ match, location, history }) => {
   const catId = match.params.id
@@ -46,7 +47,11 @@ const WishListScreen = ({ match, location, history }) => {
                   </Col>
                   <Col md={2}>{item.age}Years</Col>
                   <Col md={2}>
-                  <Col md={2}>{item.rating}</Col>
+                  <Col md={2}>
+                  <Likes
+            value={item.rating}
+            text={`${item.numReviews} likes`}/>
+            </Col>
                   </Col>
                   <Col md={2}>
                     <Button

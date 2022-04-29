@@ -11,11 +11,28 @@ import {
   createCatReview,
 } from '../actions/catActions'
 import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/catConstants'
+import MapContainer from '../components/MapContainer'
+import { DEFAULT_LOCATION } from '../constants/googleMapConstants'
 
 const CatScreen = ({ history, match }) => {
   const [qty, setQty] = useState(1)
   const [rating, setLikes] = useState(0)
   const [comment, setComment] = useState('')
+  const [lat, setLat] = useState('')
+  const [lng, setLng] = useState('')
+
+  const LOCATION = {
+    // lat: lat ,
+    // lng: lng
+    lat: lat ? lat : DEFAULT_LOCATION.lat,
+    lng: lng ? lng : DEFAULT_LOCATION.lng,
+  }
+
+  const markerDragEnd = (coord) => {
+    const { latLng } = coord
+    setLat(latLng.lat())
+    setLng(latLng.lng())
+  }
 
   const dispatch = useDispatch()
 
@@ -40,6 +57,9 @@ const CatScreen = ({ history, match }) => {
     if (!cat._id || cat._id !== match.params.id) {
       dispatch(listCatDetails(match.params.id))
       dispatch({ type: PRODUCT_CREATE_REVIEW_RESET })
+    } else {
+      setLat(cat.lat)
+      setLng(cat.lng)
     }
   }, [dispatch, match, successCatReview])
 
@@ -162,6 +182,17 @@ const CatScreen = ({ history, match }) => {
                   </ListGroup.Item>
                 </ListGroup>
               </Card>
+            </Col>
+          </Row>
+          <Row>
+            <Col md={6}>
+            </Col>
+            <Col md={6}>
+              <MapContainer
+                onMarkerDragEnd={markerDragEnd}
+                location={LOCATION}
+                draggable={true}
+              />
             </Col>
           </Row>
           <Row>
