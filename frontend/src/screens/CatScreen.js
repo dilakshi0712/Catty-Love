@@ -84,7 +84,7 @@ const CatScreen = ({ history, match }) => {
                     text={`${cat.numReviews} likes`}
                   />
                 </ListGroup.Item>
-                <ListGroup.Item>Age: Year{cat.age}</ListGroup.Item>
+                <ListGroup.Item>Age: {cat.age}Years</ListGroup.Item>
                 <ListGroup.Item>
                   Description: {cat.description}
                 </ListGroup.Item>
@@ -97,7 +97,7 @@ const CatScreen = ({ history, match }) => {
                     <Row>
                       <Col>Age:</Col>
                       <Col>
-                        <strong>Year{cat.age}</strong>
+                        <strong>{cat.age}Years</strong>
                       </Col>
                     </Row>
                   </ListGroup.Item>

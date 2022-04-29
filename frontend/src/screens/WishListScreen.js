@@ -44,7 +44,7 @@ const WishListScreen = ({ match, location, history }) => {
                   <Col md={3}>
                     <Link to={`/cat/${item.cat}`}>{item.name}</Link>
                   </Col>
-                  <Col md={2}>Year{item.age}</Col>
+                  <Col md={2}>{item.age}Years</Col>
                   <Col md={2}>
                   <Col md={2}>{item.rating}</Col>
                   </Col>
